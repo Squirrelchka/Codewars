@@ -1,0 +1,10 @@
+Solution:
+select b.user_id, b.video_id from user_playlist b
+where b.user_id in
+(
+select tt.user_id from
+(select distinct a.user_id, a.video_id from user_playlist a) tt
+group by tt.user_id
+having count(*)>2
+)
+order by b.user_id, b.video_id
